@@ -1,0 +1,19 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <h3>Welcome {{user.firstName}}</h3>
+    <p>Don't let the stress overwhelm you. Keep track of what makes you happy.</p>
+    <button class="btn btn-default" href="#" role="button" ng-click="openModal()">How Are You Feeling?</button>
+    <button class="btn btn-default" href="#" role="button">Input Activity</button>
+
+    <p>{{moods}}</p>
+
+    <h3>Your mood {{timePeriod}}
+
+    <button ng-click=setChartScope("day")>Today</button>
+    <button ng-click=setChartScope("week")>This Week</button>
+    <button ng-click=setChartScope("year")>This Year</button>
+
+    <zingchart id="dayChart" zc-json="myJson" zc-height=250 zc-width=300></zingchart>
+
+  </ion-content>
+</ion-view>
