@@ -1,0 +1,22 @@
+<ion-modal-view>
+  <ion-content>
+    <h1>Input New Activity</<h1>
+
+      <form name="inputActivity" ng-submit="submitNewActivity(activity)">
+
+      <div class="form-group" ng-class="{'has-error' : inputActivity.activity.$invalid && !inputActivity.activity.$pristine,'has-success' : inputActivity.activity.$valid }">
+        <label class="control-label" for="activity">Activity:</label>
+        <input type="activity" name="activity" class="form-control" ng-model="activity.activity" ng-minlength="2" ng-maxlength="30" ng-required="true" placeholder="Activity">
+        <small ng-show="inputActivity.activity.$error.minlength" class="help-block">Activity is too short.</small>
+        <small ng-show="inputActivity.activity.$error.maxlength" class="help-block">Activity is too long.</small>
+      </div>
+      <button type="submit" class="btn btn-default" ng-disabled="inputActivity.$invalid">Submit</button>
+    </form>
+
+    <p>{{thing}}</p>
+
+      <button class="button icon icon-left ion-ios-close-outline"
+         ng-click="closeModal()">Close</button>
+
+</ion-content>
+</ion-modal-view>

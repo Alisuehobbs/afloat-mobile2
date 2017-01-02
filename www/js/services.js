@@ -20,7 +20,11 @@ angular.module('afloat.services', [])
   }
 
   service.getActivities = function(id) {
-    return $http.get(`https://alisuehobbs-afloat.herokuapp.com/correlations/${id}`)
+    return $http.get(`https://alisuehobbs-afloat.herokuapp.com/activities/${id}`)
+  }
+
+  service.postActivity = function(data) {
+    return $http.post('https://alisuehobbs-afloat.herokuapp.com/activities', data)
   }
 
   return service

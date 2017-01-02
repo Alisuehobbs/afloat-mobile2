@@ -113,6 +113,7 @@ angular.module('afloat.controllers', [])
       $scope.modal1.hide();
       $scope.modal2.hide()
       $scope.modal3.hide()
+      $scope.modal4.hide()
     };
 
     $scope.submitMood = function(mood) {
@@ -121,17 +122,16 @@ angular.module('afloat.controllers', [])
         mood: mood
       }
 
-      if(mood == 'positive') {
+      if (mood == 'positive') {
         moodObj.rating = 1
-      } else if(mood == 'neutral') {
+      } else if (mood == 'neutral') {
         moodObj.rating = 0
       } else {
         moodObj.rating = -1
       }
 
       AllServices.postMood(moodObj).success(function(data) {
-        AllServices.getActivities(cookie.id).success(function (data) {
-          console.log('data:', data);
+        AllServices.getActivities(cookie.id).success(function(data) {
           $scope.activities = data
         })
         $scope.modal1.remove()
@@ -143,6 +143,28 @@ angular.module('afloat.controllers', [])
       })
     }
 
+    $ionicModal.fromTemplateUrl('templates/inputActivity/inputForm.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal4 = modal;
+    });
+
+    $scope.openActivityModal = function() {
+      $scope.modal4.show()
+    }
+
+    $scope.submitNewActivity = function(input) {
+      var activityObj = {
+        users_id: cookie.id,
+        activity: input.activity,
+        weight: 1
+      }
+      AllServices.postActivity(activityObj).success(function(data){
+        console.log('data:', data);
+        $scope.modal4.hide()
+      })
+    }
 
   })
 })
