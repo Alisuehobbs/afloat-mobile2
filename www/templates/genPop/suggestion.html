@@ -1,6 +1,15 @@
 <ion-modal-view>
   <ion-content>
-    <h1>Try These Activities</<h1>
+    <h1>Try One of These Activities:</<h1>
+
+      <div class="card" ng-repeat="activity in activities">
+        <div class="item item-text-wrap">
+        {{activity.activity}}
+        </div>
+        </div>
+
+      <button class="button icon icon-left ion-ios-close-outline"
+         ng-click="closeModal()">Close</button>
       <button class="button icon icon-left ion-ios-close-outline"
          ng-click="closeModal()">Close</button>
 </ion-content>

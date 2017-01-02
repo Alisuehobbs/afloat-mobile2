@@ -16,8 +16,11 @@ angular.module('afloat.services', [])
   }
 
   service.postMood = function(data) {
-    console.log('made it to the correct service');
     return $http.post('https://alisuehobbs-afloat.herokuapp.com/moods', data)
+  }
+
+  service.getActivities = function(id) {
+    return $http.get(`https://alisuehobbs-afloat.herokuapp.com/correlations/${id}`)
   }
 
   return service

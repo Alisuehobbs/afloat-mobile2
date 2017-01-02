@@ -110,9 +110,9 @@ angular.module('afloat.controllers', [])
     };
 
     $scope.closeModal = function() {
-      $scope.modal1.remove();
-      $scope.modal2.remove()
-      $scope.modal3.remove()
+      $scope.modal1.hide();
+      $scope.modal2.hide()
+      $scope.modal3.hide()
     };
 
     $scope.submitMood = function(mood) {
@@ -130,6 +130,10 @@ angular.module('afloat.controllers', [])
       }
 
       AllServices.postMood(moodObj).success(function(data) {
+        AllServices.getActivities(cookie.id).success(function (data) {
+          console.log('data:', data);
+          $scope.activities = data
+        })
         $scope.modal1.remove()
         if (mood === 'positive') {
           $scope.modal2.show()
