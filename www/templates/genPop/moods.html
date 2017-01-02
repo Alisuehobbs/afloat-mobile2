@@ -1,0 +1,11 @@
+<ion-modal-view>
+  <ion-content>
+    <h1>How are you feeling?</<h1>
+      <button class="button button-block button-balanced" ng-click="submitMood('positive')">Positive</button>
+      <button class="button button button-block button-energized" ng-click="submitMood('neutral')">Neutral</button>
+      <button class="button button button-block button-assertive" ng-click="submitMood('negative')">Negative</button>
+
+      <button class="button icon icon-left ion-ios-close-outline"
+         ng-click="closeModal()">Skip</button>
+</ion-content>
+</ion-modal-view>

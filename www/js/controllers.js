@@ -1,6 +1,6 @@
 angular.module('afloat.controllers', [])
 
-.controller('DashCtrl', function($scope, $cordovaLocalNotification, $ionicPopup, $ionicPlatform, $cookies, AllServices) {
+.controller('DashCtrl', function($scope, $cordovaLocalNotification, $ionicPopup, $ionicPlatform, $cookies, AllServices, $ionicModal) {
 
   $ionicPlatform.ready(function() {
 
@@ -83,6 +83,62 @@ angular.module('afloat.controllers', [])
         $scope.myJson = $scope.year
       }
     }
+
+    $ionicModal.fromTemplateUrl('templates/genPop/moods.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal1 = modal;
+    });
+
+    $ionicModal.fromTemplateUrl('templates/genPop/positive.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal2 = modal;
+    });
+
+    $ionicModal.fromTemplateUrl('templates/genPop/suggestion.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal3 = modal;
+    });
+
+    $scope.openModal = function() {
+      $scope.modal1.show();
+    };
+
+    $scope.closeModal = function() {
+      $scope.modal1.remove();
+      $scope.modal2.remove()
+      $scope.modal3.remove()
+    };
+
+    $scope.submitMood = function(mood) {
+      var moodObj = {
+        users_id: cookie.id,
+        mood: mood
+      }
+
+      if(mood == 'positive') {
+        moodObj.rating = 1
+      } else if(mood == 'neutral') {
+        moodObj.rating = 0
+      } else {
+        moodObj.rating = -1
+      }
+
+      AllServices.postMood(moodObj).success(function(data) {
+        $scope.modal1.remove()
+        if (mood === 'positive') {
+          $scope.modal2.show()
+        } else {
+          $scope.modal3.show()
+        }
+      })
+    }
+
 
   })
 })
