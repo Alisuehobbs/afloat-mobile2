@@ -29,10 +29,10 @@ angular.module('afloat.controllers', [])
       });
     };
 
-    // AllServices.getMoods(cookie.id).success(function(moods) {
-    //   $scope.moods = moods.data
-    //   getDate($scope.moods)
-    // })
+    AllServices.getMoods(cookie.id).success(function(moods) {
+      $scope.moods = moods
+      getDate($scope.moods)
+    })
 
     function getDate(moodsArray) {
       let todayDate = moment()
