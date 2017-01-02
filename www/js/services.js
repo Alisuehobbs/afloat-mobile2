@@ -1,6 +1,6 @@
 angular.module('afloat.services', [])
 
-.factory('UserService', function($http) {
+.factory('AllServices', function($http) {
   var service = {}
 
   service.postNewUser = function(data) {
