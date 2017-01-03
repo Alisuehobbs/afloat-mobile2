@@ -5,10 +5,7 @@ angular.module('afloat.controllers', [])
   $ionicPlatform.ready(function() {
 
     var cookie = $cookies.getObject('mobileLogIn')
-    console.log('cookie.id:', cookie.id);
     $scope.user = cookie
-
-    console.log('im super ready');
 
     $scope.add = function() {
       console.log('I was clicked');
@@ -37,18 +34,21 @@ angular.module('afloat.controllers', [])
     function getDate(moodsArray) {
       let todayDate = moment()
       let today = []
-      let week = []
-      let year = []
+      let thisWeek = []
+      let thisYear = []
       for (var i = 0; i < moodsArray.length; i++) {
-        if (moment(moodsArray[i].updated_at).isSame(todayDate, 'day')) {
+        if (moment(moodsArray[i].created_at).isSame(todayDate, 'day')) {
           today.push(moodsArray[i].rating)
-        } else if (moment(moodsArray[i].updated_at).isSame(todayDate, 'week')) {
-          week.push(moodsArray[i].rating)
-        } else if (moment(moodsArray[i].updated_at).isSame(todayDate, 'year')) {
-          year.push(moodsArray[i].rating)
+        }
+        if (moment(moodsArray[i].created_at).isSame(todayDate, 'week')) {
+          thisWeek.push(moodsArray[i].rating)
+        }
+        if (moment(moodsArray[i].created_at).isSameOrBefore(todayDate, 'year')) {
+          thisYear.push(moodsArray[i].rating)
         }
       }
-      setScope(today, week, year)
+      $scope.time = thisYear
+      setScope(today, thisWeek, thisYear)
     }
 
     function setScope(today, week, year) {
@@ -161,7 +161,6 @@ angular.module('afloat.controllers', [])
         weight: 1
       }
       AllServices.postActivity(activityObj).success(function(data) {
-        console.log('data:', data);
         $scope.modal4.hide()
       })
     }
@@ -203,13 +202,16 @@ angular.module('afloat.controllers', [])
   $ionicPlatform.ready(function() {
 
     var cookie = $cookies.getObject('mobileLogIn')
-    console.log('cookie.id:', cookie.id);
     $scope.user = cookie
+
+    var todayDate = moment()
+
+    $scope.log = todayDate
 
     AllServices.getMoods(cookie.id).success(function(moods) {
       var negativeMoods = []
       for (i = 0; i < moods.length; i++) {
-        if (moods[i].rating < 0) {
+        if (moods[i].rating < 0 && moment(moods[i].created_at).isSame(todayDate, 'day')) {
           negativeMoods.push(moods[i])
         }
       }
