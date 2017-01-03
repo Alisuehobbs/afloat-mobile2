@@ -33,11 +33,12 @@ angular.module('afloat.controllers', [])
         getDate($scope.moods)
       })
 
+      var today = []
+      var thisWeek = []
+      var thisYear = []
+
       function getDate(moodsArray) {
-        let todayDate = moment()
-        let today = []
-        let thisWeek = []
-        let thisYear = []
+        var todayDate = moment()
         for (var i = 0; i < moodsArray.length; i++) {
           if (moment(moodsArray[i].created_at).isSame(todayDate, 'day')) {
             today.push(moodsArray[i].rating)
@@ -49,7 +50,6 @@ angular.module('afloat.controllers', [])
             thisYear.push(moodsArray[i].rating)
           }
         }
-        $scope.time = thisYear
         setScope(today, thisWeek, thisYear)
       }
 
@@ -136,10 +136,21 @@ angular.module('afloat.controllers', [])
           AllServices.getActivities(cookie.id).success(function(data) {
             $scope.activities = data
           })
-          $scope.modal1.remove()
+          $scope.modal1.hide()
           if (mood === 'positive') {
+            today.push(1)
+            thisWeek.push(1)
+            thisYear.push(1)
+            $scope.modal2.show()
+          } else if (mood === 'neutral'){
+            today.push(0)
+            thisWeek.push(0)
+            thisYear.push(0)
             $scope.modal2.show()
           } else {
+            today.push(-1)
+            thisWeek.push(-1)
+            thisYear.push(-1)
             $scope.modal3.show()
           }
         })

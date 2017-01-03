@@ -1,14 +1,12 @@
 <ion-view>
-  <ion-content>
+  <ion-content class="padding">
     <h3>Nightly Check In</h3>
 
-    <p>{{positive}}</p>
-
-    <p ng-if="!positive">Today we noticed you had these negative emotions:</p>
+    <p>We noticed you had some negative feelings today at:</p>
 
     <div class="card" ng-repeat="mood in moods">
       <div class="item item-text-wrap">
-        {{mood.mood}}
+        {{mood.updated_at | date: 'h:mma'}}
       </div>
     </div>
 
