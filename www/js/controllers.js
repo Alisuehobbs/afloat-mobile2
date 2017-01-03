@@ -16,7 +16,8 @@ angular.module('afloat.controllers', [])
           id: 1,
           title: 'Good Morning!',
           text: 'How are you feeling?',
-          at: new Date(new Date().getTime() + 10 * 1000)
+          at: '3_pm',
+          every: 'day'
         }).then(function(result) {
           console.log('result:', result);
         })
@@ -24,7 +25,7 @@ angular.module('afloat.controllers', [])
 
       $rootScope.$on('$cordovaLocalNotification:click',
         function(event, notification, state) {
-          $scope.modal1.show()
+          console.log('notification:', notification);
         });
 
       AllServices.getMoods(cookie.id).success(function(moods) {
@@ -220,7 +221,7 @@ angular.module('afloat.controllers', [])
       if (negativeMoods.length > 0) {
         $scope.moods = negativeMoods
       } else {
-        $scope.positive = 'Great job today!'
+        $scope.modal2.show()
       }
     })
 
@@ -275,6 +276,18 @@ angular.module('afloat.controllers', [])
         $location.url('/tab/dash')
       })
     }
+
+    $ionicModal.fromTemplateUrl('templates/positive.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal2 = modal;
+    });
+
+    $scope.closeModal = function() {
+      $scope.modal2.hide()
+      $location.url('/tab/dash')
+    };
 
   })
 })
