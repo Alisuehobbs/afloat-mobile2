@@ -198,7 +198,7 @@ angular.module('afloat.controllers', [])
   })
 })
 
-.controller('NightController', function($scope, $ionicPlatform, AllServices, $cookies) {
+.controller('NightController', function($scope, $ionicPlatform, AllServices, $cookies, $location, $ionicModal) {
 
   $ionicPlatform.ready(function() {
 
@@ -243,10 +243,33 @@ angular.module('afloat.controllers', [])
             weight: arr[i].weight + 1
           }
           AllServices.updateWeight(obj).success(function(data){
-            console.log('data:', data);
+            $location.url('/tab/dash')
           })
         }
       }
+    }
+
+    $ionicModal.fromTemplateUrl('templates/inputActivity/inputForm.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal4 = modal;
+    });
+
+    $scope.openActivityModal = function() {
+      $scope.modal4.show()
+    }
+
+    $scope.submitNewActivity = function(input) {
+      var activityObj = {
+        users_id: cookie.id,
+        activity: input.activity,
+        weight: 1
+      }
+      AllServices.postActivity(activityObj).success(function(data) {
+        $scope.modal4.hide()
+        $location.url('/tab/dash')
+      })
     }
 
   })
