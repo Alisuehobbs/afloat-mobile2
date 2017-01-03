@@ -10,22 +10,15 @@ angular.module('afloat.controllers', [])
     } else {
       $scope.user = cookie
 
-      $scope.add = function() {
-        console.log('notification was clicked');
-        $cordovaLocalNotification.schedule({
-          id: 1,
-          title: 'Good Morning!',
-          text: 'How are you feeling?',
-          at: '3_pm',
-          every: 'day'
-        }).then(function(result) {
-          console.log('result:', result);
-        })
-      };
-
       $rootScope.$on('$cordovaLocalNotification:click',
         function(event, notification, state) {
-          console.log('notification:', notification);
+          if (notification.id == 1 || notification.id == 2) {
+            console.log('notification ', notification.id, ' was clicked');
+            $scope.modal1.show()
+          } else {
+            console.log('notification ', notification.id, ' was clicked');
+            $location.url('/nightlyCheckIn')
+          }
         });
 
       AllServices.getMoods(cookie.id).success(function(moods) {
@@ -142,7 +135,7 @@ angular.module('afloat.controllers', [])
             thisWeek.push(1)
             thisYear.push(1)
             $scope.modal2.show()
-          } else if (mood === 'neutral'){
+          } else if (mood === 'neutral') {
             today.push(0)
             thisWeek.push(0)
             thisYear.push(0)
@@ -182,13 +175,13 @@ angular.module('afloat.controllers', [])
   })
 })
 
-.controller('RegisterCtrl', function($scope, $ionicPlatform, AllServices, $location, $cookies) {
+.controller('RegisterCtrl', function($scope, $ionicPlatform, AllServices, $location, $cookies, $cordovaLocalNotification) {
   $ionicPlatform.ready(function() {
 
     $scope.submitSignUp = function(newUser) {
       AllServices.postNewUser(newUser).success(function(response) {
         if (!response.message) {
-          $cookies.putObject('mobileLogIn', response[0])
+          $cookies.putObject('mobileLogIn', response)
           $scope.newUser = {}
           $location.url('/tab/dash')
         } else {
@@ -208,6 +201,57 @@ angular.module('afloat.controllers', [])
         }
       })
     }
+
+    $scope.add = function() {
+      console.log('notification 1 was clicked');
+      var morningTime = new Date();
+      morningTime.setHours(16);
+      morningTime.setMinutes(25);
+      morningTime.setSeconds(0);
+      console.log('morningTime:', morningTime);
+      $cordovaLocalNotification.schedule({
+        id: 1,
+        title: 'Good Morning!',
+        text: 'How are you feeling?',
+        at: morningTime,
+        every: 'day'
+      }).then(function(result) {
+        console.log('result1:', result);
+      })
+
+      console.log('notification 2 was clicked');
+      var afternoonTime = new Date();
+      afternoonTime.setHours(16);
+      afternoonTime.setMinutes(26);
+      afternoonTime.setSeconds(0);
+      console.log('afternoonTime:', afternoonTime);
+      $cordovaLocalNotification.schedule({
+        id: 2,
+        title: 'Good Afternoon!',
+        text: 'How are you feeling?',
+        at: afternoonTime,
+        every: 'day'
+      }).then(function(result) {
+        console.log('result2:', result);
+      })
+
+      console.log('notification 3 was clicked');
+      var eveningTime = new Date();
+      eveningTime.setHours(16);
+      eveningTime.setMinutes(27);
+      eveningTime.setSeconds(0);
+      console.log('eveningTime:', eveningTime);
+      $cordovaLocalNotification.schedule({
+        id: 3,
+        title: 'Good Evening!',
+        text: "It's time to check in.",
+        at: eveningTime,
+        every: 'day'
+      }).then(function(result) {
+        console.log('result3:', result);
+      })
+    };
+
   })
 })
 
