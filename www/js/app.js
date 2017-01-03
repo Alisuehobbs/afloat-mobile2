@@ -3,6 +3,10 @@ angular.module('afloat', ['ionic', 'afloat.controllers', 'afloat.services', 'ngC
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     console.log('device is ready');
+
+    window.plugin.notification.local.registerPermission(function(granted) {
+      console.log('Permission has been granted: ' + granted);
+    });
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
@@ -93,6 +97,6 @@ angular.module('afloat', ['ionic', 'afloat.controllers', 'afloat.services', 'ngC
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/landing');
+  $urlRouterProvider.otherwise('/tab/dash');
 
 });
