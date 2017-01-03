@@ -38,6 +38,12 @@ angular.module('afloat', ['ionic', 'afloat.controllers', 'afloat.services', 'ngC
     templateUrl: 'templates/login.html'
   })
 
+  .state('nightlyCheckIn', {
+    url: '/nightlyCheckIn',
+    controller: 'NightController',
+    templateUrl: 'templates/nightlyCheckIn.html'
+  })
+
   // setup an abstract state for the tabs directive
   .state('tab', {
     url: '/tab',

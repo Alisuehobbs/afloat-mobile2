@@ -160,7 +160,7 @@ angular.module('afloat.controllers', [])
         activity: input.activity,
         weight: 1
       }
-      AllServices.postActivity(activityObj).success(function(data){
+      AllServices.postActivity(activityObj).success(function(data) {
         console.log('data:', data);
         $scope.modal4.hide()
       })
@@ -198,6 +198,59 @@ angular.module('afloat.controllers', [])
   })
 })
 
+.controller('NightController', function($scope, $ionicPlatform, AllServices, $cookies) {
+
+  $ionicPlatform.ready(function() {
+
+    var cookie = $cookies.getObject('mobileLogIn')
+    console.log('cookie.id:', cookie.id);
+    $scope.user = cookie
+
+    AllServices.getMoods(cookie.id).success(function(moods) {
+      var negativeMoods = []
+      for (i = 0; i < moods.length; i++) {
+        if (moods[i].rating < 0) {
+          negativeMoods.push(moods[i])
+        }
+      }
+      if (negativeMoods.length > 0) {
+        $scope.moods = negativeMoods
+      } else {
+        $scope.positive = 'Great job today!'
+      }
+    })
+
+    AllServices.getActivities(cookie.id).success(function(data) {
+      $scope.activities = []
+      for (i = 0; i < data.length; i++) {
+        var newActivity = {
+          id: data[i].id,
+          activity: data[i].activity,
+          weight: data[i].weight,
+          checked: false
+        }
+        $scope.activities.push(newActivity)
+      }
+    })
+
+    $scope.save = function(arr) {
+      for (i = 0; i < arr.length; i++) {
+        if (arr[i].checked == true) {
+          var obj = {
+            id: arr[i].id,
+            users_id: cookie.id,
+            activity: arr[i].activity,
+            weight: arr[i].weight + 1
+          }
+          AllServices.updateWeight(obj).success(function(data){
+            console.log('data:', data);
+          })
+        }
+      }
+    }
+
+  })
+})
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   $scope.chat = Chats.get($stateParams.chatId);

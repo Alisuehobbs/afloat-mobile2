@@ -27,5 +27,10 @@ angular.module('afloat.services', [])
     return $http.post('https://alisuehobbs-afloat.herokuapp.com/activities', data)
   }
 
+  service.updateWeight = function(data) {
+    var id = data.id
+    return $http.put(`https://alisuehobbs-afloat.herokuapp.com/activities/${id}`, data)
+  }
+
   return service
 });

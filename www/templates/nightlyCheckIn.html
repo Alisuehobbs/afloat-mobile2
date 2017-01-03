@@ -1,0 +1,22 @@
+<ion-view>
+  <ion-content>
+    <h3>Nightly Check In</h3>
+
+    <p>{{positive}}</p>
+
+    <p ng-if="!positive">Today we noticed you had these negative emotions:</p>
+
+    <div class="card" ng-repeat="mood in moods">
+      <div class="item item-text-wrap">
+        {{mood.mood}}
+      </div>
+    </div>
+
+    <p>Did any of your favorite activities help? Select All That Apply</p>
+
+      <ion-checkbox ng-repeat="activity in activities" ng-model="activity.checked" value="{{activity}}">{{activity.activity}}</ion-checkbox>
+
+      <button class="button" ng-click="save(activities)">submit</button>
+
+  </ion-content>
+</ion-view>
