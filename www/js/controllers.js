@@ -185,7 +185,6 @@ angular.module('afloat.controllers', [])
       $scope.submitSignUp = function(newUser) {
         AllServices.postNewUser(newUser).success(function(response) {
           if (!response.message) {
-            console.log('response:', response);
             $cookies.putObject('mobileLogIn', response[0])
             $scope.newUser = {}
             $location.url('/tab/dash')
@@ -198,7 +197,6 @@ angular.module('afloat.controllers', [])
       $scope.submitLogIn = function(returningUser) {
         AllServices.loginUser(returningUser).success(function(response) {
           if (!response.message) {
-            console.log('response:', response);
             $cookies.putObject('mobileLogIn', response)
             $scope.returningUser = {}
             $location.url('/tab/dash')
@@ -209,50 +207,41 @@ angular.module('afloat.controllers', [])
       }
 
       $scope.add = function() {
-        console.log('notification 1 was clicked');
         var morningTime = new Date();
-        morningTime.setHours(16);
-        morningTime.setMinutes(25);
+        morningTime.setHours(8);
+        morningTime.setMinutes(0);
         morningTime.setSeconds(0);
-        console.log('morningTime:', morningTime);
         $cordovaLocalNotification.schedule({
           id: 1,
           title: 'Good Morning!',
           text: 'How are you feeling?',
+          at: morningTime,
           every: 'day'
-        }).then(function(result) {
-          console.log('result1:', result);
-        })
+        }).then(function(result) {})
 
-        console.log('notification 2 was clicked');
         var afternoonTime = new Date();
-        afternoonTime.setHours(16);
-        afternoonTime.setMinutes(26);
+        afternoonTime.setHours(12);
+        afternoonTime.setMinutes(0);
         afternoonTime.setSeconds(0);
-        console.log('afternoonTime:', afternoonTime);
         $cordovaLocalNotification.schedule({
           id: 2,
           title: 'Good Afternoon!',
           text: 'How are you feeling?',
+          at: afternoonTime,
           every: 'day'
-        }).then(function(result) {
-          console.log('result2:', result);
-        })
+        }).then(function(result) {})
 
-        console.log('notification 3 was clicked');
         var eveningTime = new Date();
-        eveningTime.setHours(16);
-        eveningTime.setMinutes(27);
+        eveningTime.setHours(20);
+        eveningTime.setMinutes(0);
         eveningTime.setSeconds(0);
-        console.log('eveningTime:', eveningTime);
         $cordovaLocalNotification.schedule({
           id: 3,
           title: 'Good Evening!',
           text: "It's time to check in.",
+          at: eveningTime,
           every: 'day'
-        }).then(function(result) {
-          console.log('result3:', result);
-        })
+        }).then(function(result) {})
       };
     }
   })
@@ -266,8 +255,6 @@ angular.module('afloat.controllers', [])
     $scope.user = cookie
 
     var todayDate = moment()
-
-    $scope.log = todayDate
 
     AllServices.getMoods(cookie.id).success(function(moods) {
       var negativeMoods = []
