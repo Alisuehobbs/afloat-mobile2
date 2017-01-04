@@ -67,7 +67,10 @@ angular.module('afloat.controllers', [])
             values: year
           }]
         }
+
+        $scope.myJson = $scope.day
       }
+
 
       $scope.setChartScope = function(input) {
         if (input == "day") {
@@ -208,8 +211,8 @@ angular.module('afloat.controllers', [])
 
       $scope.add = function() {
         var morningTime = new Date();
-        morningTime.setHours(9);
-        morningTime.setMinutes(55);
+        morningTime.setHours(8);
+        morningTime.setMinutes(0);
         morningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 1,
@@ -220,8 +223,8 @@ angular.module('afloat.controllers', [])
         }).then(function(result) {})
 
         var afternoonTime = new Date();
-        afternoonTime.setHours(9);
-        afternoonTime.setMinutes(56);
+        afternoonTime.setHours(12);
+        afternoonTime.setMinutes(0);
         afternoonTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 2,
@@ -232,8 +235,8 @@ angular.module('afloat.controllers', [])
         }).then(function(result) {})
 
         var eveningTime = new Date();
-        eveningTime.setHours(9);
-        eveningTime.setMinutes(57);
+        eveningTime.setHours(20);
+        eveningTime.setMinutes(0);
         eveningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 3,
