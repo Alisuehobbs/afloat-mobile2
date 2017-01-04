@@ -208,8 +208,8 @@ angular.module('afloat.controllers', [])
 
       $scope.add = function() {
         var morningTime = new Date();
-        morningTime.setHours(8);
-        morningTime.setMinutes(0);
+        morningTime.setHours(9);
+        morningTime.setMinutes(55);
         morningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 1,
@@ -220,8 +220,8 @@ angular.module('afloat.controllers', [])
         }).then(function(result) {})
 
         var afternoonTime = new Date();
-        afternoonTime.setHours(12);
-        afternoonTime.setMinutes(0);
+        afternoonTime.setHours(9);
+        afternoonTime.setMinutes(56);
         afternoonTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 2,
@@ -232,8 +232,8 @@ angular.module('afloat.controllers', [])
         }).then(function(result) {})
 
         var eveningTime = new Date();
-        eveningTime.setHours(20);
-        eveningTime.setMinutes(0);
+        eveningTime.setHours(9);
+        eveningTime.setMinutes(57);
         eveningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 3,
@@ -292,11 +292,13 @@ angular.module('afloat.controllers', [])
             activity: arr[i].activity,
             weight: arr[i].weight + 1
           }
-          AllServices.updateWeight(obj).success(function(data) {
-            $location.url('/tab/dash')
-          })
+          AllServices.updateWeight(obj).success(function(data) {})
         }
       }
+      for (i = 0; i < arr.length; i++) {
+        arr[i].checked = false
+      }
+      $location.url('/tab/dash')
     }
 
     $ionicModal.fromTemplateUrl('templates/inputForm.html', {
