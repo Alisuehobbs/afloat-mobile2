@@ -197,11 +197,17 @@ angular.module('afloat.controllers', [])
         })
       }
 
+      $scope.returningUser = {
+        email: 'ali@ali.com',
+        password: 'test1234'
+      }
+
       $scope.submitLogIn = function(returningUser) {
         AllServices.loginUser(returningUser).success(function(response) {
           if (!response.message) {
             $cookies.putObject('mobileLogIn', response)
             $scope.returningUser = {}
+            $scope.add()
             $location.url('/tab/dash')
           } else {
             $scope.error = response.message
@@ -210,41 +216,47 @@ angular.module('afloat.controllers', [])
       }
 
       $scope.add = function() {
-        var morningTime = new Date();
-        morningTime.setHours(8);
-        morningTime.setMinutes(0);
-        morningTime.setSeconds(0);
+        var morningTime = new Date().getTime() + 5 * 1000
+        // morningTime.setHours(8);
+        // morningTime.setMinutes(0);
+        // morningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 1,
           title: 'Good Morning!',
           text: 'How are you feeling?',
           at: morningTime,
           every: 'day'
-        }).then(function(result) {})
+        }).then(function(result) {
+          console.log('1 scheuled');
+        })
 
-        var afternoonTime = new Date();
-        afternoonTime.setHours(12);
-        afternoonTime.setMinutes(0);
-        afternoonTime.setSeconds(0);
+        var afternoonTime = new Date().getTime() + 10 * 1000
+        // afternoonTime.setHours(12);
+        // afternoonTime.setMinutes(0);
+        // afternoonTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 2,
           title: 'Good Afternoon!',
           text: 'How are you feeling?',
           at: afternoonTime,
           every: 'day'
-        }).then(function(result) {})
+        }).then(function(result) {
+          console.log('2 scheduled');
+        })
 
-        var eveningTime = new Date();
-        eveningTime.setHours(20);
-        eveningTime.setMinutes(0);
-        eveningTime.setSeconds(0);
+        var eveningTime = new Date().getTime() + 15 * 1000;
+        // eveningTime.setHours(20);
+        // eveningTime.setMinutes(0);
+        // eveningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 3,
           title: 'Good Evening!',
           text: "It's time to check in.",
           at: eveningTime,
           every: 'day'
-        }).then(function(result) {})
+        }).then(function(result) {
+          console.log('3 scheduled');
+        })
       };
     }
   })

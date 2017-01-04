@@ -12,7 +12,7 @@
 
     <p>Did any of your favorite activities help? Select All That Apply</p>
 
-      <ion-checkbox ng-repeat="activity in activities" ng-model="activity.checked" value="{{activity}}">{{activity.activity}}</ion-checkbox>
+      <ion-checkbox ng-repeat="activity in activities | orderBy: '-weight'" ng-model="activity.checked" value="{{activity}}">{{activity.activity}}</ion-checkbox>
       <button class="button" ng-click="save(activities)">submit</button>
 
       <button class="button" ng-click="openActivityModal()">If not, input new activity</button>
