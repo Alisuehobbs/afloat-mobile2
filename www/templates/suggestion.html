@@ -3,7 +3,7 @@
     <h1>Try One of These Activities:</<h1>
 
       <div class="card" ng-repeat="activity in activities | orderBy: '-weight' | limitTo:3">
-        <div class="item item-text-wrap">
+        <div class="item item-text-wrap capitalize">
         {{activity.activity}}
         </div>
         </div>

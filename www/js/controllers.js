@@ -166,11 +166,11 @@ angular.module('afloat.controllers', [])
       $scope.submitNewActivity = function(input) {
         var activityObj = {
           users_id: cookie.id,
-          activity: input.activity,
+          activity: input.activity.toLowerCase(),
           weight: 1
         }
         AllServices.postActivity(activityObj).success(function(data) {
-          inputActivity.setPristine()
+          input.activity = ''
           $scope.modal4.hide()
         })
       }
