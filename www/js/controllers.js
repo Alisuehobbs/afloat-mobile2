@@ -170,6 +170,7 @@ angular.module('afloat.controllers', [])
           weight: 1
         }
         AllServices.postActivity(activityObj).success(function(data) {
+          inputActivity.setPristine()
           $scope.modal4.hide()
         })
       }
@@ -183,14 +184,14 @@ angular.module('afloat.controllers', [])
 
     var cookie = $cookies.getObject('mobileLogIn')
     if (cookie) {
-      $location.url('/tab/dash')
+      $location.url('/dashboard')
     } else {
       $scope.submitSignUp = function(newUser) {
         AllServices.postNewUser(newUser).success(function(response) {
           if (!response.message) {
             $cookies.putObject('mobileLogIn', response[0])
             $scope.newUser = {}
-            $location.url('/tab/dash')
+            $location.url('/dashboard')
           } else {
             $scope.error = response.message
           }
@@ -208,7 +209,7 @@ angular.module('afloat.controllers', [])
             $cookies.putObject('mobileLogIn', response)
             $scope.returningUser = {}
             $scope.add()
-            $location.url('/tab/dash')
+            $location.url('/dashboard')
           } else {
             $scope.error = response.message
           }
@@ -313,7 +314,7 @@ angular.module('afloat.controllers', [])
       for (i = 0; i < arr.length; i++) {
         arr[i].checked = false
       }
-      $location.url('/tab/dash')
+      $location.url('/dashboard')
     }
 
     $ionicModal.fromTemplateUrl('templates/inputForm.html', {
@@ -335,7 +336,7 @@ angular.module('afloat.controllers', [])
       }
       AllServices.postActivity(activityObj).success(function(data) {
         $scope.modal4.hide()
-        $location.url('/tab/dash')
+        $location.url('/dashboard')
       })
     }
 
@@ -348,18 +349,8 @@ angular.module('afloat.controllers', [])
 
     $scope.closeModal = function() {
       $scope.modal2.hide()
-      $location.url('/tab/dash')
+      $location.url('/dashboard')
     };
 
   })
 })
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
