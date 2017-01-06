@@ -86,19 +86,13 @@ angular.module('afloat.controllers', [])
         $scope.myJson = $scope.day
       }
 
-      $scope.timePeriod = "Today"
-
       $scope.setChartScope = function(input) {
-        $scope.timePeriod = input
         if (input == "day") {
           $scope.myJson = $scope.day
-          $scope.timePeriod = "Today"
         } else if (input == "week") {
           $scope.myJson = $scope.week
-          $scope.timePeriod = "This Week"
         } else {
           $scope.myJson = $scope.year
-          $scope.timePeriod = "This Year"
         }
       }
 
@@ -145,6 +139,7 @@ angular.module('afloat.controllers', [])
             today.push(1)
             thisWeek.push(1)
             thisYear.push(1)
+            console.log('today:', today);
             $scope.modal2.show()
           } else if (mood === 'neutral') {
             today.push(0)
@@ -333,6 +328,7 @@ angular.module('afloat.controllers', [])
 
     $scope.closeModal = function() {
       $scope.modal2.hide()
+      $scope.modal4.hide()
       $location.url('/tab/dash')
     };
 
