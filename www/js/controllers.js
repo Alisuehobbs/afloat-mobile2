@@ -12,7 +12,7 @@ angular.module('afloat.controllers', [])
 
       $rootScope.$on('$cordovaLocalNotification:click',
         function(event, notification, state) {
-          if (notification.id == '1' || notification.id == '2') {
+          if (notification.id == 1 || notification.id == 2) {
             console.log('notification ', notification.id, ' was clicked');
             $location.url('/tab/mood')
           } else {
@@ -23,12 +23,12 @@ angular.module('afloat.controllers', [])
 
       AllServices.getMoods(cookie.id).success(function(moods) {
         $scope.moods = moods
-        getDate(moods)
+        getDate($scope.moods)
       })
 
       var today = []
-      var thisWeek = []
-      var thisYear = []
+      var week = []
+      var year = []
 
       function getDate(moodsArray) {
         var todayDate = moment()
@@ -37,19 +37,16 @@ angular.module('afloat.controllers', [])
             today.push(moodsArray[i].rating)
           }
           if (moment(moodsArray[i].created_at).isSame(todayDate, 'week')) {
-            thisWeek.push(moodsArray[i].rating)
+            week.push(moodsArray[i].rating)
           }
           if (moment(moodsArray[i].created_at).isSameOrBefore(todayDate, 'year')) {
-            thisYear.push(moodsArray[i].rating)
+            year.push(moodsArray[i].rating)
           }
         }
-        setScope(today, thisWeek, thisYear)
+        setScope(today, week, year)
       }
 
-       function setScope(today, thisWeek, thisYear) {
-         console.log('today:', today);
-         console.log('thisWeek:', thisWeek);
-         console.log('thisYear:', thisYear);
+      function setScope(today, week, year) {
         $scope.day = {
           title: {
             text: "Your Mood Today",
@@ -70,7 +67,7 @@ angular.module('afloat.controllers', [])
           backgroundColor: "#B2DCF7",
           type: 'line',
           series: [{
-            values: thisWeek
+            values: week
           }]
         }
 
@@ -82,7 +79,7 @@ angular.module('afloat.controllers', [])
           backgroundColor: "#B2DCF7",
           type: 'line',
           series: [{
-            values: thisYear
+            values: year
           }]
         }
         $scope.myJson = $scope.day
@@ -96,6 +93,18 @@ angular.module('afloat.controllers', [])
         } else {
           $scope.myJson = $scope.year
         }
+      }
+
+      $ionicModal.fromTemplateUrl('templates/mood.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.modal1 = modal;
+      });
+
+      $scope.openMood = function () {
+        console.log('I was clicked');
+        $scope.modal1.show()
       }
 
       $ionicModal.fromTemplateUrl('templates/positive.html', {
@@ -116,7 +125,6 @@ angular.module('afloat.controllers', [])
       $scope.closeModal = function() {
         $scope.modal2.hide()
         $scope.modal3.hide()
-        $location.url('/tab/dash')
       };
 
       $scope.submitMood = function(mood) {
@@ -137,23 +145,21 @@ angular.module('afloat.controllers', [])
           AllServices.getActivities(cookie.id).success(function(data) {
             $scope.activities = data
           })
+          $scope.modal1.hide()
           if (mood === 'positive') {
             today.push(1)
-            thisWeek.push(1)
-            thisYear.push(1)
-            setScope(today, thisWeek, thisYear)
+            week.push(1)
+            year.push(1)
             $scope.modal2.show()
           } else if (mood === 'neutral') {
             today.push(0)
-            thisWeek.push(0)
-            thisYear.push(0)
-            setScope(today, thisWeek, thisYear)
+            week.push(0)
+            year.push(0)
             $scope.modal2.show()
           } else {
             today.push(-1)
-            thisWeek.push(-1)
-            thisYear.push(-1)
-            setScope(today, thisWeek, thisYear)
+            week.push(-1)
+            year.push(-1)
             $scope.modal3.show()
           }
         })
@@ -205,7 +211,7 @@ angular.module('afloat.controllers', [])
           // morningTime.setMinutes(0);
           // morningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
-          id: '1',
+          id: 1,
           title: 'Good Morning!',
           text: 'How are you feeling?',
           at: morningTime,
@@ -219,7 +225,7 @@ angular.module('afloat.controllers', [])
           // afternoonTime.setMinutes(0);
           // afternoonTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
-          id: '2',
+          id: 2,
           title: 'Good Afternoon!',
           text: 'How are you feeling?',
           at: afternoonTime,
@@ -233,7 +239,7 @@ angular.module('afloat.controllers', [])
         // eveningTime.setMinutes(0);
         // eveningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
-          id: '3',
+          id: 3,
           title: 'Good Evening!',
           text: "It's time to check in.",
           at: eveningTime,

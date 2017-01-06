@@ -65,16 +65,6 @@ angular.module('afloat', ['ionic', 'afloat.controllers', 'afloat.services', 'ngC
     }
   })
 
-  .state('tab.mood', {
-    url: '/mood',
-    views: {
-      'tab-mood': {
-        templateUrl: 'templates/tab-mood.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
-
   .state('tab.check', {
     url: '/check',
     views: {

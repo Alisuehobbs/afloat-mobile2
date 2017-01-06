@@ -1,5 +1,6 @@
 <ion-view>
   <ion-content class="padding" id="dash">
+
     <h4 class="title">Hi, {{user.firstName}}.</h4>
 
     <zingchart id="myChart" zc-json="myJson" zc-height=250 zc-width=300></zingchart>
@@ -9,6 +10,7 @@
       <a class="button button-positive" ng-click=setChartScope("week")>Week</a>
       <a class="button button-positive" ng-click=setChartScope("year")>Year</a>
     </div>
+    <button class="button button-block button-calm" ng-click="openMood()">How Are You Feeling?</button>
 
   </ion-content>
 </ion-view>
