@@ -12,7 +12,7 @@ angular.module('afloat.controllers', [])
 
       $rootScope.$on('$cordovaLocalNotification:click',
         function(event, notification, state) {
-          if (notification.id == 1 || notification.id == 2) {
+          if (notification.id == '1' || notification.id == '2') {
             console.log('notification ', notification.id, ' was clicked');
             $location.url('/tab/mood')
           } else {
@@ -22,6 +22,7 @@ angular.module('afloat.controllers', [])
         });
 
       AllServices.getMoods(cookie.id).success(function(moods) {
+        console.log('made it here');
         $scope.moods = moods
         getDate(moods)
       })
@@ -31,6 +32,7 @@ angular.module('afloat.controllers', [])
       var thisYear = []
 
       function getDate(moodsArray) {
+        console.log('made it to get date');
         var todayDate = moment()
         for (var i = 0; i < moodsArray.length; i++) {
           if (moment(moodsArray[i].created_at).isSame(todayDate, 'day')) {
@@ -43,45 +45,50 @@ angular.module('afloat.controllers', [])
             thisYear.push(moodsArray[i].rating)
           }
         }
+        setScope(today, thisWeek, thisYear)
       }
 
-      $scope.day = {
-        title: {
-          text: "Your Mood Today",
-          color: "black",
-        },
-        backgroundColor: "#B2DCF7",
-        type: 'line',
-        series: [{
-          values: today
-        }]
+
+      var setScope = function(today, thisWeek, thisYear) {
+        console.log('made it to set chart scope');
+        $scope.day = {
+          title: {
+            text: "Your Mood Today",
+            color: "black",
+          },
+          backgroundColor: "#B2DCF7",
+          type: 'line',
+          series: [{
+            values: today
+          }]
+        }
+
+        $scope.week = {
+          title: {
+            text: "Your Mood This Week",
+            color: "black",
+          },
+          backgroundColor: "#B2DCF7",
+          type: 'line',
+          series: [{
+            values: thisWeek
+          }]
+        }
+
+        $scope.year = {
+          title: {
+            text: "Your Mood This Year",
+            color: "black",
+          },
+          backgroundColor: "#B2DCF7",
+          type: 'line',
+          series: [{
+            values: thisYear
+          }]
+        }
+        $scope.myJson = $scope.day
       }
 
-      $scope.week = {
-        title: {
-          text: "Your Mood This Week",
-          color: "black",
-        },
-        backgroundColor: "#B2DCF7",
-        type: 'line',
-        series: [{
-          values: thisWeek
-        }]
-      }
-
-      $scope.year = {
-        title: {
-          text: "Your Mood This Year",
-          color: "black",
-        },
-        backgroundColor: "#B2DCF7",
-        type: 'line',
-        series: [{
-          values: thisYear
-        }]
-      }
-
-      $scope.myJson = $scope.day
 
       $scope.setChartScope = function(input) {
         if (input == "day") {
@@ -198,7 +205,7 @@ angular.module('afloat.controllers', [])
           // morningTime.setMinutes(0);
           // morningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
-          id: 1,
+          id: '1',
           title: 'Good Morning!',
           text: 'How are you feeling?',
           at: morningTime,
@@ -212,7 +219,7 @@ angular.module('afloat.controllers', [])
           // afternoonTime.setMinutes(0);
           // afternoonTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
-          id: 2,
+          id: '2',
           title: 'Good Afternoon!',
           text: 'How are you feeling?',
           at: afternoonTime,
@@ -226,7 +233,7 @@ angular.module('afloat.controllers', [])
         // eveningTime.setMinutes(0);
         // eveningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
-          id: 3,
+          id: '3',
           title: 'Good Evening!',
           text: "It's time to check in.",
           at: eveningTime,

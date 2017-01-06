@@ -1,8 +1,8 @@
 <ion-view>
   <ion-content class="padding" id="dash">
-    <h3 class="title">Welcome, {{user.firstName}}.</h3>
+    <h4 class="title">Hi, {{user.firstName}}.</h4>
 
-    <zingchart id="dayChart" zc-json="myJson" zc-height=300 zc-width=350></zingchart>
+    <zingchart id="dayChart" zc-json="myJson" zc-height=250 zc-width=300></zingchart>
 
     <div class="button-bar" id="buttons">
       <a class="button button-positive" ng-click=setChartScope("day")>Today</a>
