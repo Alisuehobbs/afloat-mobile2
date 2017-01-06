@@ -1,18 +1,14 @@
 <ion-view>
-  <ion-content class="padding setup">
+  <ion-content class="padding" id="dash">
     <h3 class="title">Welcome, {{user.firstName}}.</h3>
 
-    <p>Your mood: {{timePeriod}}</p>
+    <zingchart id="dayChart" zc-json="myJson" zc-height=300 zc-width=350></zingchart>
 
-    <div class="button-bar">
+    <div class="button-bar" id="buttons">
       <a class="button button-positive" ng-click=setChartScope("day")>Today</a>
       <a class="button button-positive" ng-click=setChartScope("week")>This Week</a>
       <a class="button button-positive" ng-click=setChartScope("year")>This Year</a>
     </div>
-
-    <zingchart id="dayChart" zc-json="myJson" zc-height=250 zc-width=300></zingchart>
-
-    <a class="btn btn-default" href="#/nightlyCheckIn" role="button">Nightly Check In!</a>
 
   </ion-content>
 </ion-view>

@@ -48,6 +48,10 @@ angular.module('afloat.controllers', [])
 
       function setScope(today, week, year) {
         $scope.day = {
+          title: {
+              text: "Your Mood Today"
+          },
+          backgroundColor: "#B2DCF7",
           type: 'line',
           series: [{
             values: today
@@ -55,6 +59,10 @@ angular.module('afloat.controllers', [])
         }
 
         $scope.week = {
+          title: {
+              text: "Your Mood This Week"
+          },
+          backgroundColor: "#B2DCF7",
           type: 'line',
           series: [{
             values: week
@@ -62,6 +70,10 @@ angular.module('afloat.controllers', [])
         }
 
         $scope.year = {
+          title: {
+              text: "Your Mood This Year"
+          },
+          backgroundColor: "#B2DCF7",
           type: 'line',
           series: [{
             values: year
@@ -77,10 +89,13 @@ angular.module('afloat.controllers', [])
         $scope.timePeriod = input
         if (input == "day") {
           $scope.myJson = $scope.day
+          $scope.timePeriod = "Today"
         } else if (input == "week") {
           $scope.myJson = $scope.week
+          $scope.timePeriod = "This Week"
         } else {
           $scope.myJson = $scope.year
+          $scope.timePeriod = "This Year"
         }
       }
 
@@ -220,9 +235,9 @@ angular.module('afloat.controllers', [])
 
       $scope.add = function() {
         var morningTime = new Date().getTime() + 5 * 1000
-        // morningTime.setHours(8);
-        // morningTime.setMinutes(0);
-        // morningTime.setSeconds(0);
+          // morningTime.setHours(8);
+          // morningTime.setMinutes(0);
+          // morningTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 1,
           title: 'Good Morning!',
@@ -234,9 +249,9 @@ angular.module('afloat.controllers', [])
         })
 
         var afternoonTime = new Date().getTime() + 10 * 1000
-        // afternoonTime.setHours(12);
-        // afternoonTime.setMinutes(0);
-        // afternoonTime.setSeconds(0);
+          // afternoonTime.setHours(12);
+          // afternoonTime.setMinutes(0);
+          // afternoonTime.setSeconds(0);
         $cordovaLocalNotification.schedule({
           id: 2,
           title: 'Good Afternoon!',
