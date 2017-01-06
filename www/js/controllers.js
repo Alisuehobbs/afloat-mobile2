@@ -14,7 +14,7 @@ angular.module('afloat.controllers', [])
         function(event, notification, state) {
           if (notification.id == 1 || notification.id == 2) {
             console.log('notification ', notification.id, ' was clicked');
-            $location.url('/tab/mood')
+            $scope.modal1.show()
           } else {
             console.log('notification ', notification.id, ' was clicked');
             $location.url('/tab/check')
@@ -103,7 +103,6 @@ angular.module('afloat.controllers', [])
       });
 
       $scope.openMood = function () {
-        console.log('I was clicked');
         $scope.modal1.show()
       }
 
@@ -123,6 +122,7 @@ angular.module('afloat.controllers', [])
 
 
       $scope.closeModal = function() {
+        $scope.modal1.hide()
         $scope.modal2.hide()
         $scope.modal3.hide()
       };
