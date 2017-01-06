@@ -23,7 +23,7 @@ angular.module('afloat.controllers', [])
 
       AllServices.getMoods(cookie.id).success(function(moods) {
         $scope.moods = moods
-        getDate($scope.moods)
+        getDate(moods)
       })
 
       var today = []
@@ -43,48 +43,45 @@ angular.module('afloat.controllers', [])
             thisYear.push(moodsArray[i].rating)
           }
         }
-        setScope(today, thisWeek, thisYear)
       }
 
-      function setScope(today, week, year) {
-        $scope.day = {
-          title: {
-            text: "Your Mood Today",
-            color: "black",
-          },
-          backgroundColor: "#B2DCF7",
-          type: 'line',
-          series: [{
-            values: today
-          }]
-        }
-
-        $scope.week = {
-          title: {
-            text: "Your Mood This Week",
-            color: "black",
-          },
-          backgroundColor: "#B2DCF7",
-          type: 'line',
-          series: [{
-            values: week
-          }]
-        }
-
-        $scope.year = {
-          title: {
-            text: "Your Mood This Year",
-            color: "black",
-          },
-          backgroundColor: "#B2DCF7",
-          type: 'line',
-          series: [{
-            values: year
-          }]
-        }
-
-        $scope.myJson = $scope.day
+      $scope.day = {
+        title: {
+          text: "Your Mood Today",
+          color: "black",
+        },
+        backgroundColor: "#B2DCF7",
+        type: 'line',
+        series: [{
+          values: today
+        }]
       }
+
+      $scope.week = {
+        title: {
+          text: "Your Mood This Week",
+          color: "black",
+        },
+        backgroundColor: "#B2DCF7",
+        type: 'line',
+        series: [{
+          values: thisWeek
+        }]
+      }
+
+      $scope.year = {
+        title: {
+          text: "Your Mood This Year",
+          color: "black",
+        },
+        backgroundColor: "#B2DCF7",
+        type: 'line',
+        series: [{
+          values: thisYear
+        }]
+      }
+
+      $scope.myJson = $scope.day
 
       $scope.setChartScope = function(input) {
         if (input == "day") {
@@ -134,24 +131,24 @@ angular.module('afloat.controllers', [])
         AllServices.postMood(moodObj).success(function(data) {
           AllServices.getActivities(cookie.id).success(function(data) {
             $scope.activities = data
+            if (mood === 'positive') {
+              today.push(1)
+              thisWeek.push(1)
+              thisYear.push(1)
+              console.log('today:', today);
+              $scope.modal2.show()
+            } else if (mood === 'neutral') {
+              today.push(0)
+              thisWeek.push(0)
+              thisYear.push(0)
+              $scope.modal2.show()
+            } else {
+              today.push(-1)
+              thisWeek.push(-1)
+              thisYear.push(-1)
+              $scope.modal3.show()
+            }
           })
-          if (mood === 'positive') {
-            today.push(1)
-            thisWeek.push(1)
-            thisYear.push(1)
-            console.log('today:', today);
-            $scope.modal2.show()
-          } else if (mood === 'neutral') {
-            today.push(0)
-            thisWeek.push(0)
-            thisYear.push(0)
-            $scope.modal2.show()
-          } else {
-            today.push(-1)
-            thisWeek.push(-1)
-            thisYear.push(-1)
-            $scope.modal3.show()
-          }
         })
       }
     }
