@@ -1,23 +1,23 @@
-<ion-view view-title="Login" name="login">
-  <ion-content class="padding">
-    <h3>LOGIN</h3>
+<ion-view>
+  <ion-content class="padding setup">
+    <h3 class="title">LOGIN</h3>
     <p class="error"> {{error}} </p>
     <a href="#/signup">Sign Up</a>
-    <form name="logIn" ng-submit="submitLogIn(returningUser)">
+    
+      <form name="logIn" ng-submit="submitLogIn(returningUser)">
 
-    <div class="form-group" ng-class="{'has-error' : logIn.email.$invalid && !logIn.email.$pristine,'has-success' : logIn.email.$valid }">
-      <label class="control-label" for="email">Email:</label>
-      <input type="email" name="email" class="form-control" ng-model="returningUser.email" ng-minlength="2" ng-maxlength="30" ng-required="true" placeholder="Email">
-      <small ng-show="logIn.email.$error.minlength" class="help-block">Email is too short.</small>
-      <small ng-show="logIn.email.$error.maxlength" class="help-block">Email is too long.</small>
-    </div>
-    <div class="form-group" ng-class="{'has-error' : logIn.password.$invalid && !logIn.password.$pristine,'has-success' : logIn.password.$valid }">
-      <label class="control-label" for="password">Password:</label>
-      <input type="password" name="password" class="form-control" ng-model="returningUser.password" ng-minlength="2" ng-maxlength="100" ng-required="true" placeholder="Password">
-      <small ng-show="logIn.password.$error.minlength" class="help-block">Password is too short.</small>
-      <small ng-show="logIn.password.$error.maxlength" class="help-block">Password is too long.</small>
-    </div>
-    <button type="submit" class="btn btn-default" ng-disabled="logIn.$invalid">Submit</button>
-  </form>
+        <div class="list">
+          <label class="item item-input">
+            <input type="email" name="email" class="form-control" ng-model="returningUser.email" ng-minlength="2" ng-maxlength="30" ng-required="true" placeholder="Email">
+          </label>
+          <label class="item item-input">
+            <input type="password" name="password" class="form-control" ng-model="returningUser.password" ng-minlength="2" ng-maxlength="100" ng-required="true" placeholder="Password">
+          </label>
+
+        </div>
+        <button type="submit" class="button button-block" ng-disabled="logIn.$invalid">Submit</button>
+      </form>
+
+
   </ion-content>
 </ion-view>

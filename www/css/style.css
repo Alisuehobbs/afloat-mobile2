@@ -1,7 +1,45 @@
+.setup {
+  background-color: #B2DCF7;
+  padding-top: 100px;
+  font-family: 'Karla', sans-serif;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 50px;
+  text-align: center;
+  font-family: 'Karla', sans-serif;
+}
+
+img {
+  border-radius: 50%;
+  height: 100px;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p {
+  text-align: center;
+  font-family: 'Karla', sans-serif;
+}
+
 .error {
   color: red;
 }
 
 .capitalize {
-   text-transform: capitalize;
+  text-transform: capitalize;
 }
+
+#login {
+  background-color: #B2DCF7;
+  padding-top: 100px;
+}
+
+
+/*#1576ab*/
+
+
+/*#ffefd1*/

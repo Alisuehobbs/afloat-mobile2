@@ -71,8 +71,10 @@ angular.module('afloat.controllers', [])
         $scope.myJson = $scope.day
       }
 
+      $scope.timePeriod = "Today"
 
       $scope.setChartScope = function(input) {
+        $scope.timePeriod = input
         if (input == "day") {
           $scope.myJson = $scope.day
         } else if (input == "week") {
@@ -184,14 +186,14 @@ angular.module('afloat.controllers', [])
 
     var cookie = $cookies.getObject('mobileLogIn')
     if (cookie) {
-      $location.url('/dashboard')
+      $location.url('/tab/dash')
     } else {
       $scope.submitSignUp = function(newUser) {
         AllServices.postNewUser(newUser).success(function(response) {
           if (!response.message) {
             $cookies.putObject('mobileLogIn', response[0])
             $scope.newUser = {}
-            $location.url('/dashboard')
+            $location.url('/tab/dash')
           } else {
             $scope.error = response.message
           }
@@ -209,7 +211,7 @@ angular.module('afloat.controllers', [])
             $cookies.putObject('mobileLogIn', response)
             $scope.returningUser = {}
             $scope.add()
-            $location.url('/dashboard')
+            $location.url('/tab/dash')
           } else {
             $scope.error = response.message
           }
@@ -314,7 +316,7 @@ angular.module('afloat.controllers', [])
       for (i = 0; i < arr.length; i++) {
         arr[i].checked = false
       }
-      $location.url('/dashboard')
+      $location.url('/tab/dash')
     }
 
     $ionicModal.fromTemplateUrl('templates/inputForm.html', {
@@ -336,7 +338,7 @@ angular.module('afloat.controllers', [])
       }
       AllServices.postActivity(activityObj).success(function(data) {
         $scope.modal4.hide()
-        $location.url('/dashboard')
+        $location.url('/tab/dash')
       })
     }
 
@@ -349,7 +351,7 @@ angular.module('afloat.controllers', [])
 
     $scope.closeModal = function() {
       $scope.modal2.hide()
-      $location.url('/dashboard')
+      $location.url('/tab/dash')
     };
 
   })

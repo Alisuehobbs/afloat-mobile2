@@ -1,56 +1,41 @@
-<ion-view view-title="SignUp" name="signup">
-  <ion-content class="padding">
-    <h3>SIGNUP</h3>
+<ion-view>
+  <ion-content class="padding setup">
+    <h3 class="title">SIGNUP</h3>
     <p class="error"> {{error}} </p>
     <a href="#/login">Log In</a>
     <form name="signUp" ng-submit="submitSignUp(newUser)">
 
-      <div class="form-group" ng-class="{'has-error' : signUp.firstName.$invalid && !signUp.firstName.$pristine,'has-success' : signUp.firstName.$valid }">
-        <label class="control-label" for="firstName">First Name:</label>
+      <div class="list">
+        <label class="item item-input">
         <input type="text" name="firstName" class="form-control" ng-model="newUser.firstName" ng-minlength="2" ng-maxlength="30" ng-required="true" placeholder="First Name">
-        <small ng-show="signUp.firstName.$error.minlength" class="help-block">First Name is too short.</small>
-        <small ng-show="signUp.firstName.$error.maxlength" class="help-block">First Name is too long.</small>
-      </div>
-      <div class="form-group" ng-class="{'has-error' : signUp.lastName.$invalid && !signUp.lastName.$pristine,'has-success' : signUp.lastName.$valid }">
-        <label class="control-label" for="lastName">Last Name:</label>
-        <input type="text" name="lastName" class="form-control" ng-model="newUser.lastName" ng-minlength="2" ng-maxlength="30" ng-required="true" placeholder="Last Name">
-        <small ng-show="signUp.lastName.$error.minlength" class="help-block">Last Name is too short.</small>
-        <small ng-show="signUp.lastName.$error.maxlength" class="help-block">Last Name is too long.</small>
-      </div>
-      <div class="form-group" ng-class="{'has-error' : signUp.email.$invalid && !signUp.email.$pristine,'has-success' : signUp.email.$valid }">
-        <label class="control-label" for="email">Email:</label>
-        <input type="email" name="email" class="form-control" ng-model="newUser.email" ng-minlength="2" ng-maxlength="30" ng-required="true" placeholder="Email">
-        <small ng-show="signUp.email.$error.minlength" class="help-block">Email is too short.</small>
-        <small ng-show="signUp.email.$error.maxlength" class="help-block">Email is too long.</small>
-      </div>
-      <div class="form-group" ng-class="{'has-error' : signUp.password.$invalid && !signUp.password.$pristine,'has-success' : signUp.password.$valid }">
-        <label class="control-label" for="password">Password:</label>
-        <input type="password" name="password" class="form-control" ng-model="newUser.password" ng-minlength="2" ng-maxlength="100" ng-required="true" plac eholder="Password">
-        <small ng-show="signUp.password.$error.minlength" class="help-block">Password is too short.</small>
-        <small ng-show="signUp.password.$error.maxlength" class="help-block">Password is too long.</small>
-      </div>
-      What are you 3 favorite activities to relax?
-      <div class="form-group" ng-class="{'has-error' : signUp.activity1.$invalid && !signUp.activity1.$pristine,'has-success' : signUp.activity1.$valid }">
-        <label class="control-label" for="activity1">Acivity:</label>
-        <input type="activity1" name="activity1" class="form-control" ng-model="newUser.activity1" ng-minlength="2" ng-maxlength="100" ng-required="true" placeholder="Swimming">
-        <small ng-show="signUp.activity1.$error.minlength" class="help-block">Acivity is too short.</small>
-        <small ng-show="signUp.activity1.$error.maxlength" class="help-block">Acivity is too long.</small>
-      </div>
-      <div class="form-group" ng-class="{'has-error' : signUp.activity2.$invalid && !signUp.activity2.$pristine,'has-success' : signUp.activity2.$valid }">
-        <label class="control-label" for="activity2">Acivity:</label>
-        <input type="activity2" name="activity2" class="form-control" ng-model="newUser.activity2" ng-minlength="2" ng-maxlength="100" ng-required="true" placeholder="Coloring">
-        <small ng-show="signUp.activity2.$error.minlength" class="help-block">Acivity is too short.</small>
-        <small ng-show="signUp.activity2.$error.maxlength" class="help-block">Acivity is too long.</small>
-      </div>
-      <div class="form-group" ng-class="{'has-error' : signUp.activity3.$invalid && !signUp.activity3.$pristine,'has-success' : signUp.activity3.$valid }">
-        <label class="control-label" for="activity3">Acivity:</label>
-        <input type="activity3" name="activity3" class="form-control" ng-model="newUser.activity3" ng-minlength="2" ng-maxlength="100" ng-required="true" placeholder="Yoga">
-        <small ng-show="signUp.activity3.$error.minlength" class="help-block">Acivity is too short.</small>
-        <small ng-show="signUp.activity3.$error.maxlength" class="help-block">Acivity is too long.</small>
-      </div>
-      <button type="submit" class="btn btn-default" ng-disabled="signUp.$invalid">Submit</button>
-    </form>
+      </label>
 
-    <button class="button" ng-click="add()">Enable Notifications</button>
+        <label class="item item-input">
+        <input type="text" name="lastName" class="form-control" ng-model="newUser.lastName" ng-minlength="2" ng-maxlength="30" ng-required="true" placeholder="Last Name">
+      </label>
+
+        <label class="item item-input">
+        <input type="email" name="email" class="form-control" ng-model="newUser.email" ng-minlength="2" ng-maxlength="30" ng-required="true" placeholder="Email">
+      </label>
+
+        <label class="item item-input">
+        <input type="password" name="password" class="form-control" ng-model="newUser.password" ng-minlength="2" ng-maxlength="100" ng-required="true" placeholder="Password">
+      </label>
+        <br>
+        <p>What are you 3 favorite activities to relax?</p>
+        <label class="item item-input">
+        <input type="text" name="activity1" class="form-control" ng-model="newUser.activity1" ng-minlength="2" ng-maxlength="100" ng-required="true" placeholder="Swimming">
+      </label>
+
+        <label class="item item-input">
+        <input type="text" name="activity2" class="form-control" ng-model="newUser.activity2" ng-minlength="2" ng-maxlength="100" ng-required="true" placeholder="Coloring">
+      </label>
+
+        <label class="item item-input">
+          <input type="text" name="activity3" class="form-control" ng-model="newUser.activity3" ng-minlength="2" ng-maxlength="100" ng-required="true" placeholder="Yoga">
+      </label>
+      </div>
+      <button type="submit" class="button button-block" ng-disabled="signUp.$invalid">Submit</button>
+    </form>
   </ion-content>
 </ion-view>

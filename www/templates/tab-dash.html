@@ -1,15 +1,14 @@
-<ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <h3>Welcome {{user.firstName}}</h3>
-    <p>Don't let the stress overwhelm you. Keep track of what makes you happy.</p>
-    <button class="btn btn-default" href="#" role="button" ng-click="openModal()">How Are You Feeling?</button>
-    <button class="btn btn-default" href="#" role="button" ng-click="openActivityModal()">Input Activity</button>
+<ion-view>
+  <ion-content class="padding setup">
+    <h3 class="title">Welcome, {{user.firstName}}.</h3>
 
-    <h3>Your mood {{timePeriod}}</h3>
+    <p>Your mood: {{timePeriod}}</p>
 
-    <button ng-click=setChartScope("day")>Today</button>
-    <button ng-click=setChartScope("week")>This Week</button>
-    <button ng-click=setChartScope("year")>This Year</button>
+    <div class="button-bar">
+      <a class="button button-positive" ng-click=setChartScope("day")>Today</a>
+      <a class="button button-positive" ng-click=setChartScope("week")>This Week</a>
+      <a class="button button-positive" ng-click=setChartScope("year")>This Year</a>
+    </div>
 
     <zingchart id="dayChart" zc-json="myJson" zc-height=250 zc-width=300></zingchart>
 

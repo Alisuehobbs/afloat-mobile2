@@ -48,11 +48,43 @@ angular.module('afloat', ['ionic', 'afloat.controllers', 'afloat.services', 'ngC
     templateUrl: 'templates/nightlyCheckIn.html'
   })
 
-  .state('dashboard', {
-    url: '/dashboard',
-    controller: 'DashCtrl',
-    templateUrl: 'templates/tab-dash.html'
+  .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
   })
+
+  // Each tab has its own nav history stack:
+
+  .state('tab.dash', {
+    url: '/dash',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-dash.html',
+        controller: 'DashCtrl'
+      }
+    }
+  })
+
+  .state('tab.mood', {
+      url: '/mood',
+      views: {
+        'tab-mood': {
+          templateUrl: 'templates/tab-mood.html',
+          controller: 'DashCtrl'
+        }
+      }
+    })
+
+  .state('tab.check', {
+    url: '/check',
+    views: {
+      'tab-check': {
+        templateUrl: 'templates/tab-check.html',
+        controller: 'DashCtrl'
+      }
+    }
+  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/landing');
