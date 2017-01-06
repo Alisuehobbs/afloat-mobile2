@@ -22,7 +22,6 @@ angular.module('afloat.controllers', [])
         });
 
       AllServices.getMoods(cookie.id).success(function(moods) {
-        console.log('made it here');
         $scope.moods = moods
         getDate(moods)
       })
@@ -32,7 +31,6 @@ angular.module('afloat.controllers', [])
       var thisYear = []
 
       function getDate(moodsArray) {
-        console.log('made it to get date');
         var todayDate = moment()
         for (var i = 0; i < moodsArray.length; i++) {
           if (moment(moodsArray[i].created_at).isSame(todayDate, 'day')) {
@@ -48,9 +46,10 @@ angular.module('afloat.controllers', [])
         setScope(today, thisWeek, thisYear)
       }
 
-
-      var setScope = function(today, thisWeek, thisYear) {
-        console.log('made it to set chart scope');
+       function setScope(today, thisWeek, thisYear) {
+         console.log('today:', today);
+         console.log('thisWeek:', thisWeek);
+         console.log('thisYear:', thisYear);
         $scope.day = {
           title: {
             text: "Your Mood Today",
@@ -88,7 +87,6 @@ angular.module('afloat.controllers', [])
         }
         $scope.myJson = $scope.day
       }
-
 
       $scope.setChartScope = function(input) {
         if (input == "day") {
@@ -138,24 +136,26 @@ angular.module('afloat.controllers', [])
         AllServices.postMood(moodObj).success(function(data) {
           AllServices.getActivities(cookie.id).success(function(data) {
             $scope.activities = data
-            if (mood === 'positive') {
-              today.push(1)
-              thisWeek.push(1)
-              thisYear.push(1)
-              console.log('today:', today);
-              $scope.modal2.show()
-            } else if (mood === 'neutral') {
-              today.push(0)
-              thisWeek.push(0)
-              thisYear.push(0)
-              $scope.modal2.show()
-            } else {
-              today.push(-1)
-              thisWeek.push(-1)
-              thisYear.push(-1)
-              $scope.modal3.show()
-            }
           })
+          if (mood === 'positive') {
+            today.push(1)
+            thisWeek.push(1)
+            thisYear.push(1)
+            setScope(today, thisWeek, thisYear)
+            $scope.modal2.show()
+          } else if (mood === 'neutral') {
+            today.push(0)
+            thisWeek.push(0)
+            thisYear.push(0)
+            setScope(today, thisWeek, thisYear)
+            $scope.modal2.show()
+          } else {
+            today.push(-1)
+            thisWeek.push(-1)
+            thisYear.push(-1)
+            setScope(today, thisWeek, thisYear)
+            $scope.modal3.show()
+          }
         })
       }
     }
