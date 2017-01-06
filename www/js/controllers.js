@@ -14,10 +14,10 @@ angular.module('afloat.controllers', [])
         function(event, notification, state) {
           if (notification.id == 1 || notification.id == 2) {
             console.log('notification ', notification.id, ' was clicked');
-            $scope.modal1.show()
+            $location.url('/tab/mood')
           } else {
             console.log('notification ', notification.id, ' was clicked');
-            $location.url('/nightlyCheckIn')
+            $location.url('/tab/check')
           }
         });
 
