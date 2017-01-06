@@ -1,6 +1,7 @@
 angular.module('afloat', ['ionic', 'afloat.controllers', 'afloat.services', 'ngCordova', 'ngCookies', 'zingchart-angularjs'])
 
 .run(function($ionicPlatform) {
+
   $ionicPlatform.ready(function() {
     console.log('device is ready');
 
@@ -61,14 +62,14 @@ angular.module('afloat', ['ionic', 'afloat.controllers', 'afloat.services', 'ngC
   })
 
   .state('tab.mood', {
-      url: '/mood',
-      views: {
-        'tab-mood': {
-          templateUrl: 'templates/tab-mood.html',
-          controller: 'DashCtrl'
-        }
+    url: '/mood',
+    views: {
+      'tab-mood': {
+        templateUrl: 'templates/tab-mood.html',
+        controller: 'DashCtrl'
       }
-    })
+    }
+  })
 
   .state('tab.check', {
     url: '/check',
