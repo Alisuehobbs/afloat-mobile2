@@ -42,12 +42,6 @@ angular.module('afloat', ['ionic', 'afloat.controllers', 'afloat.services', 'ngC
     templateUrl: 'templates/login.html'
   })
 
-  .state('nightlyCheckIn', {
-    url: '/nightlyCheckIn',
-    controller: 'NightController',
-    templateUrl: 'templates/nightlyCheckIn.html'
-  })
-
   .state('tab', {
     url: '/tab',
     abstract: true,
@@ -81,7 +75,7 @@ angular.module('afloat', ['ionic', 'afloat.controllers', 'afloat.services', 'ngC
     views: {
       'tab-check': {
         templateUrl: 'templates/tab-check.html',
-        controller: 'DashCtrl'
+        controller: 'NightController'
       }
     }
   });

@@ -4,6 +4,10 @@
   font-family: 'Karla', sans-serif;
 }
 
+#check {
+  background-color: #B2DCF7;
+}
+
 #dash {
   background-color: #B2DCF7;
   padding-top: 50px;
@@ -13,6 +17,10 @@
   padding-top: 20px;
 }
 
+#suggestion {
+  text-align: center;
+}
+
 .title {
   font-weight: bold;
   font-size: 50px;
@@ -20,13 +28,26 @@
   font-family: 'Karla', sans-serif;
 }
 
-img {
+#logo {
   border-radius: 50%;
   height: 100px;
   width: auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+#fireworks {
+  height: 200px;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h5 {
+  font-weight: bold;
+  text-align: center;
 }
 
 p {

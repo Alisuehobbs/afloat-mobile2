@@ -1,23 +1,23 @@
 <ion-view>
-  <ion-content class="padding">
-    <h3>Nightly Check In</h3>
+  <ion-content class="padding" id="check">
 
     <p>We noticed you had some negative feelings today at:</p>
 
-    <div class="card" ng-repeat="mood in moods">
-      <div class="item item-text-wrap">
+    <ul class="list" ng-repeat="mood in moods">
+      <li class="item capitalize">
         {{mood.updated_at | date: 'h:mma'}}
-      </div>
+      </li>
+    </ul>
     </div>
 
-    <p>Did any of your favorite activities help? Select All That Apply</p>
+    <p>Did any of your favorite activities help?</p>
 
-      <ion-checkbox ng-repeat="activity in activities | orderBy: '-weight' | limitTo:3" ng-model="activity.checked" value="{{activity}}" class="capitalize">{{activity.activity}}</ion-checkbox>
-      <button class="button" ng-click="save(activities)">submit</button>
+    <ion-checkbox ng-repeat="activity in activities | orderBy: '-weight' | limitTo:3" ng-model="activity.checked" value="{{activity}}" class="capitalize">{{activity.activity}}</ion-checkbox>
 
-      <button class="button" ng-click="openActivityModal()">If not, input new activity</button>
-
-      <a class="button" href="#/tab/dash">Home</a>
+    <br>
+      <a class="button button-block button-positive" ng-click="save(activities)">Submit</a>
+      <a class="button button-block button-positive" ng-click="openActivityModal()">Add New Activity</a>
+      <button class="button icon icon-left ion-ios-close-outline" href="#/tab/dash">Close</button>
 
   </ion-content>
 </ion-view>

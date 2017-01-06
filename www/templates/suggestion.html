@@ -1,14 +1,15 @@
 <ion-modal-view>
-  <ion-content class="padding">
-    <h1>Try One of These Activities:</<h1>
+  <ion-content class="padding setup">
+    <h3 id="suggestion">Try One of These Activities:</h3>
 
-      <div class="card" ng-repeat="activity in activities | orderBy: '-weight' | limitTo:3">
-        <div class="item item-text-wrap capitalize">
+      <ul class="list" ng-repeat="activity in activities | orderBy: '-weight' | limitTo:3">
+        <li class="item capitalize">
         {{activity.activity}}
-        </div>
-        </div>
+      </li>
+    </ul>
 
-        <p>We'll follow up with you tonight</p>
+        <h5>We hope you feel better soon.</h5>
+        <p>We'll follow up with you tonight.</p>
 
       <button class="button icon icon-left ion-ios-close-outline"
          ng-click="closeModal()">Close</button>

@@ -49,7 +49,8 @@ angular.module('afloat.controllers', [])
       function setScope(today, week, year) {
         $scope.day = {
           title: {
-              text: "Your Mood Today"
+            text: "Your Mood Today",
+            color: "black",
           },
           backgroundColor: "#B2DCF7",
           type: 'line',
@@ -60,7 +61,8 @@ angular.module('afloat.controllers', [])
 
         $scope.week = {
           title: {
-              text: "Your Mood This Week"
+            text: "Your Mood This Week",
+            color: "black",
           },
           backgroundColor: "#B2DCF7",
           type: 'line',
@@ -71,7 +73,8 @@ angular.module('afloat.controllers', [])
 
         $scope.year = {
           title: {
-              text: "Your Mood This Year"
+            text: "Your Mood This Year",
+            color: "black",
           },
           backgroundColor: "#B2DCF7",
           type: 'line',
@@ -99,13 +102,6 @@ angular.module('afloat.controllers', [])
         }
       }
 
-      $ionicModal.fromTemplateUrl('templates/moods.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-      }).then(function(modal) {
-        $scope.modal1 = modal;
-      });
-
       $ionicModal.fromTemplateUrl('templates/positive.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -120,15 +116,11 @@ angular.module('afloat.controllers', [])
         $scope.modal3 = modal;
       });
 
-      $scope.openModal = function() {
-        $scope.modal1.show();
-      };
 
       $scope.closeModal = function() {
-        $scope.modal1.hide();
         $scope.modal2.hide()
         $scope.modal3.hide()
-        $scope.modal4.hide()
+        $location.url('/tab/dash')
       };
 
       $scope.submitMood = function(mood) {
@@ -149,7 +141,6 @@ angular.module('afloat.controllers', [])
           AllServices.getActivities(cookie.id).success(function(data) {
             $scope.activities = data
           })
-          $scope.modal1.hide()
           if (mood === 'positive') {
             today.push(1)
             thisWeek.push(1)
@@ -168,31 +159,7 @@ angular.module('afloat.controllers', [])
           }
         })
       }
-
-      $ionicModal.fromTemplateUrl('templates/inputForm.html', {
-        scope: $scope,
-        animation: 'slide-in-up'
-      }).then(function(modal) {
-        $scope.modal4 = modal;
-      });
-
-      $scope.openActivityModal = function() {
-        $scope.modal4.show()
-      }
-
-      $scope.submitNewActivity = function(input) {
-        var activityObj = {
-          users_id: cookie.id,
-          activity: input.activity.toLowerCase(),
-          weight: 1
-        }
-        AllServices.postActivity(activityObj).success(function(data) {
-          input.activity = ''
-          $scope.modal4.hide()
-        })
-      }
     }
-
   })
 })
 
